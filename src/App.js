@@ -5,7 +5,7 @@ import HomePage from "./pages/homepage/homepage.component";
 import ShopPage from "./pages/shop/shop.component";
 import Header from "./components/header/header.component";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up-page/sign-in-and-sign-up.componant";
-import { auth } from "./firebase/firebase.utils";
+import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 
 const Contact = () => (
   <div>
@@ -23,10 +23,23 @@ class App extends React.Component {
   unsubscribrFromAuth = null;
 
   componentDidMount() {
-    auth.onAuthStateChanged(user => {
-      this.setState({ currentUser: user });
+    auth.onAuthStateChanged(async userAuth => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
 
-      console.log(this.state.currentUser);
+        userRef.onSnapshot(snapshot => {
+          this.setState(
+            {
+              currentUser: {
+                id: snapshot.id,
+                ...snapshot.data()
+              }
+            },
+            () => console.log(this.state)
+          );
+        });
+      }
+      this.setState({ currentUser: userAuth });
     });
   }
 
