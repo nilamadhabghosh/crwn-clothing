@@ -65,6 +65,7 @@ class App extends React.Component {
   }
 }
 
+// Root Reducer
 const mapStateToProps = ({ user }) => ({ currentUser: user.currentUser });
 
 const mapDispatchToProps = dispatch => ({
