@@ -7,6 +7,7 @@ import ShopPage from "./pages/shop/shop.component";
 import Header from "./components/header/header.component";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up-page/sign-in-and-sign-up.componant";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
+
 import { setCurrentUser } from "./redux/user/user.action";
 
 const Contact = () => (
@@ -15,7 +16,7 @@ const Contact = () => (
   </div>
 );
 class App extends React.Component {
-  unsubscribrFromAuth = null;
+  unsubscribeFromAuth = null;
 
   componentDidMount() {
     const { setCurrentUser } = this.props;
@@ -28,8 +29,7 @@ class App extends React.Component {
             {
               id: snapshot.id,
               ...snapshot.data()
-            },
-            () => console.log(this.state)
+            }
           );
         });
       }
@@ -38,7 +38,7 @@ class App extends React.Component {
   }
 
   componentWillUnmount() {
-    this.unsubscribrFromAuth();
+    this.unsubscribeFromAuth();
   }
   render() {
     return (
@@ -54,8 +54,8 @@ class App extends React.Component {
               this.props.currentUser ? (
                 <Redirect to="/" />
               ) : (
-                <SignInAndSignUpPage />
-              )
+                  <SignInAndSignUpPage />
+                )
             }
           />
           <Route path="/contact" component={Contact} />

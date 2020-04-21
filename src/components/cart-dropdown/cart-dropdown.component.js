@@ -17,7 +17,7 @@ const Cart = ({ cartItems }) => (
   </div>
 );
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   cartItems: selectCartItemsCount(state)
 });
 
