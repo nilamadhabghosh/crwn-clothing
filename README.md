@@ -61,7 +61,7 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/ad
 
 ### Deployment
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+The project is live on : https://crwn2-shopping-live.herokuapp.com/
 
 ### `yarn build` fails to minify
 
